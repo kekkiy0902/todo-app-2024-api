@@ -1,0 +1,16 @@
+import { SequelizeModuleOptions } from '@nestjs/sequelize';
+import { Todo } from './src/todos/entities/todo.entity';
+import { User } from './src/users/entities/user.entity';
+
+export const sequelizeConfig: SequelizeModuleOptions = {
+  dialect: 'mysql',
+  host: 'localhost',
+  port: 3306,
+  username: 'test',
+  password: 'test1234',
+  database: 'todo_db',
+  models: [Todo, User],
+  timezone: '+09:00',
+};
+
+module.exports = sequelizeConfig;
