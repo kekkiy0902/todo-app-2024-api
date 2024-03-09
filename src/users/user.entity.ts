@@ -6,7 +6,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Company } from '../companies/company.entity';
+import { Company } from '@/companies/company.entity';
 
 @Table({
   createdAt: 'created_at',

@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Todo } from '../todos/todo.entity';
-import { User } from '../users/user.entity';
-import { Company } from '../companies/company.entity';
-import { Category } from '../categories/category.entity';
-import { TodoCategory } from '../todo-category/todoCategory.entity';
+import { Category } from '@/categories/category.entity';
+import { Company } from '@/companies/company.entity';
+import { TodoCategory } from '@/todo-categories/todoCategory.entity';
+import { Todo } from '@/todos/todo.entity';
+import { User } from '@/users/user.entity';
 
 export const databaseProviders = [
   {

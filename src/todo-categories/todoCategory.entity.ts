@@ -5,8 +5,8 @@ import {
   DataType,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Todo } from '../todos/todo.entity';
-import { Category } from '../categories/category.entity';
+import { Category } from '@/categories/category.entity';
+import { Todo } from '@/todos/todo.entity';
 
 @Table({
   createdAt: 'created_at',

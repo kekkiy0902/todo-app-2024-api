@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { Op } from 'sequelize';
+import { Category } from '@/categories/category.entity';
 import { Todo } from './todo.entity';
-import { Category } from '../categories/category.entity';
-import Sequelize from 'sequelize';
 
 @Injectable()
 export class TodoService {
@@ -11,7 +11,7 @@ export class TodoService {
 
   async findByTitle(title: string): Promise<Todo[]> {
     return await this.TODO_REPOSITORY.findAll<Todo>({
-      where: { title: { [Sequelize.Op.like]: `%${title}%` } },
+      where: { title: { [Op.like]: `%${title}%` } },
       include: [
         {
           model: Category,

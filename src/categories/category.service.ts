@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { Todo } from '@/todos/todo.entity';
 import { Category } from './category.entity';
-import { Todo } from '../todos/todo.entity';
 
 @Injectable()
 export class CategoryService {

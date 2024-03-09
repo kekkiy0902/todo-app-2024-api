@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { Op } from 'sequelize';
+import { Company } from '@/companies/company.entity';
 import { User } from './user.entity';
-import { Company } from '../companies/company.entity';
-import Sequelize from 'sequelize';
 
 @Injectable()
 export class UserService {
@@ -19,7 +19,7 @@ export class UserService {
           attributes: ['name'],
           where: {
             name: {
-              [Sequelize.Op.like]: `%${name}%`,
+              [Op.like]: `%${name}%`,
             },
           },
         },

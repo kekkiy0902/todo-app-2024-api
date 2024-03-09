@@ -5,8 +5,8 @@ import {
   DataType,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { Category } from '../categories/category.entity';
-import { TodoCategory } from '../todo-category/todoCategory.entity';
+import { Category } from '@/categories/category.entity';
+import { TodoCategory } from '@/todo-categories/todoCategory.entity';
 
 @Table({
   createdAt: 'created_at',

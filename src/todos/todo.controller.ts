@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { TodoService } from './todo.service';
 import { Todo } from './todo.entity';
+import { TodoService } from './todo.service';
 
 @Controller({
   path: 'todo',
