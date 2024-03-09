@@ -1,7 +1,10 @@
 import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
-@Table
-export class User extends Model<User> {
+@Table({
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+})
+export class Company extends Model<Company> {
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -9,18 +12,6 @@ export class User extends Model<User> {
     allowNull: false,
   })
   id: number;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  userId: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  password: string;
 
   @Column({
     type: DataType.STRING,

@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Todo } from '../todos/todo.entity';
-import { User } from '../users/entities/user.entity';
+import { User } from '../users/user.entity';
+import { Company } from '../companies/company.entity';
 
 export const databaseProviders = [
   {
@@ -15,7 +16,7 @@ export const databaseProviders = [
         database: 'todo_db',
         timezone: '+09:00',
       });
-      sequelize.addModels([Todo, User]);
+      sequelize.addModels([Todo, User, Company]);
       await sequelize.sync();
       return sequelize;
     },

@@ -1,6 +1,6 @@
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
 import { Todo } from './src/todos/todo.entity';
-import { User } from './src/users/entities/user.entity';
+import { User } from './src/users/user.entity';
 
 export const sequelizeConfig: SequelizeModuleOptions = {
   dialect: 'mysql',
