@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  BelongsToMany,
+} from 'sequelize-typescript';
+import { Category } from '../categories/category.entity';
+import { TodoCategory } from '../todo-category/todoCategory.entity';
 
 @Table({
   createdAt: 'created_at',
@@ -10,4 +18,7 @@ export class Todo extends Model<Todo> {
     allowNull: false,
   })
   title: string;
+
+  @BelongsToMany(() => Category, () => TodoCategory)
+  categories: Category[];
 }

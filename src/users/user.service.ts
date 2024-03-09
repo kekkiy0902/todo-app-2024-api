@@ -12,6 +12,7 @@ export class UserService {
 
   async findByCompanyName(name: string): Promise<User[] | null> {
     return await this.USER_REPOSITORY.findAll<User>({
+      attributes: { exclude: ['password'] },
       include: [
         {
           model: Company,
@@ -28,6 +29,7 @@ export class UserService {
 
   async findOneWithCompanyName(id: number): Promise<User | null> {
     return await this.USER_REPOSITORY.findByPk<User>(id, {
+      attributes: { exclude: ['password'] },
       include: [
         {
           model: Company,
@@ -39,12 +41,14 @@ export class UserService {
 
   async findOne(id: number): Promise<User | null> {
     return await this.USER_REPOSITORY.findByPk<User>(id, {
+      attributes: { exclude: ['password'] },
       include: [Company],
     });
   }
 
   async findAll(): Promise<User[]> {
     return await this.USER_REPOSITORY.findAll<User>({
+      attributes: { exclude: ['password'] },
       include: [Company], // Companyテーブルの全ての情報と紐づけられる
     });
   }
