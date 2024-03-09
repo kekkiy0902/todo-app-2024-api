@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { sequelizeConfig } from '../sequelize.config';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [SequelizeModule.forRoot(sequelizeConfig)],
+  imports: [DatabaseModule],
 })
 export class AppModule {}
