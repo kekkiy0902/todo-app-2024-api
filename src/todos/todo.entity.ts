@@ -19,6 +19,12 @@ export class Todo extends Model<Todo> {
   })
   title: string;
 
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  description: string;
+
   @BelongsToMany(() => Category, () => TodoCategory)
   categories: Category[];
 }

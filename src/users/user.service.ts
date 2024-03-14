@@ -39,10 +39,9 @@ export class UserService {
     });
   }
 
-  async findOne(id: number): Promise<User | null> {
-    return await this.USER_REPOSITORY.findByPk<User>(id, {
-      attributes: { exclude: ['password'] },
-      include: [Company],
+  async findOne(user_id: string): Promise<User | null> {
+    return await this.USER_REPOSITORY.findOne<User>({
+      where: { user_id },
     });
   }
 

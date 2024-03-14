@@ -32,7 +32,7 @@ export class UserController {
 
   @Get('/:id')
   getUser(@Param('id') id: string): Promise<User | null> {
-    return this.userService.findOne(+id);
+    return this.userService.findOne(id);
   }
 
   @Get()
