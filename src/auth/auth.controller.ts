@@ -1,4 +1,10 @@
-import { Body, Controller, Post, BadRequestException } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  BadRequestException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller({
@@ -19,7 +25,7 @@ export class AuthController {
     );
 
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedException('IDまたはパスワードが間違っています。');
     }
 
     return this.authService.login(user);

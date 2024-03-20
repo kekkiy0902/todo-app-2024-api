@@ -11,7 +11,7 @@ import { JwtStrategy } from './jwt.strategy';
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60s' }, // トークンの有効期限を設定
+      signOptions: { expiresIn: '60m' }, // トークンの有効期限を設定
     }),
     UserModule,
   ],
