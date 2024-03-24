@@ -1,11 +1,6 @@
-import {
-  Body,
-  Controller,
-  Post,
-  BadRequestException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Body, Controller, Post, BadRequestException } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { PostLoginRequest } from './dto/post-login-interface';
 
 @Controller({
   path: 'auth',
@@ -14,20 +9,16 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('login')
-  async login(@Body() loginDto: { user_id: string; password: string }) {
+  async login(@Body() loginDto: PostLoginRequest) {
     if (!loginDto.user_id || !loginDto.password) {
       throw new BadRequestException('Missing credentials');
     }
 
-    const user = await this.authService.validateUser(
+    const result = await this.authService.login(
       loginDto.user_id,
       loginDto.password,
     );
 
-    if (!user) {
-      throw new UnauthorizedException('IDまたはパスワードが間違っています。');
-    }
-
-    return this.authService.login(user);
+    return result;
   }
 }

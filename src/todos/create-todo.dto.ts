@@ -8,4 +8,7 @@ export class CreateTodoDto {
 
   @IsNotEmpty({ message: 'ディスクリプションは必須です。' })
   description: string;
+
+  @IsNotEmpty({ message: 'カテゴリは必須です。' })
+  category_ids: number[];
 }

@@ -1,4 +1,7 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { UserDecorator } from 'src/users/user.decorator';
+import { AdminRoleGuard } from '@/auth/guards/roles.guard';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
@@ -7,11 +10,17 @@ type GetUserWithCompanyNameResponse = {
   company_name: string;
 };
 
+@UseGuards(AuthGuard('jwt'))
 @Controller({
   path: 'user',
 })
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get('/profile')
+  getProfile(@UserDecorator() user: any): Promise<User | null> {
+    return this.userService.findOne(user.user_id);
+  }
 
   @Get('/company/search')
   findByCompanyName(@Query('name') name: string): Promise<User[]> {
@@ -36,6 +45,7 @@ export class UserController {
   }
 
   @Get()
+  @UseGuards(AdminRoleGuard) // システム管理者のみアクセス可能
   getUsers(): Promise<User[]> {
     return this.userService.findAll();
   }

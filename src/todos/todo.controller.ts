@@ -6,9 +6,11 @@ import {
   Query,
   Body,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateTodoDto } from './create-todo.dto';
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { Todo } from './todo.entity';
 import { TodoService } from './todo.service';
 
@@ -21,7 +23,7 @@ export class TodoController {
 
   @Post()
   createTodo(@Body() createTodoDto: CreateTodoDto): Promise<Todo> {
-    return this.todoService.create(createTodoDto);
+    return this.todoService.createTodoWithCategories(createTodoDto);
   }
 
   @Get('/search')
@@ -35,6 +37,7 @@ export class TodoController {
   }
 
   @Get()
+  @UseInterceptors(LoggingInterceptor) // 特定のルートハンドラにインターセプターを適用
   getTodos(): Promise<Todo[]> {
     return this.todoService.findAll();
   }

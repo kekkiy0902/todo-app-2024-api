@@ -11,6 +11,7 @@ import { UserModule } from './users/user.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: ['.env'],
     }),
     DatabaseModule,
     AuthModule,

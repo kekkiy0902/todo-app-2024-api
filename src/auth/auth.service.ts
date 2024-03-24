@@ -1,7 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UserService } from '@/users/user.service';
+import { PostLoginResponse } from './dto/post-login-interface';
 
 @Injectable()
 export class AuthService {
@@ -10,30 +15,29 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(user_id: string, pass: string): Promise<any> {
+  async login(user_id: string, pass: string): Promise<PostLoginResponse> {
     // user_idを使ってユーザーを検索
     const user = await this.userService.findOne(user_id);
 
-    // パスワードが一致した場合、パスワードを除外したユーザー情報を返す
-    if (user && (await bcrypt.compare(pass, user.password))) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password: _password, ...result } = user.toJSON();
-
-      return result;
+    if (!user) {
+      throw new NotFoundException('ユーザーが存在しません。');
     }
 
-    return null;
-  }
+    // パスワードが一致した場合、パスワードを除外したユーザー情報を返す
+    if (await bcrypt.compare(pass, user.password)) {
+      const payload = {
+        user_id: user.user_id,
+        role_id: user.role_id,
+        company_id: user.company_id,
+        user_name: user.name,
+      };
 
-  async login(user: any) {
-    const payload = {
-      user_id: user.user_id,
-      user_name: user.name,
-      company_id: user.company_id,
-    };
+      return {
+        ...payload,
+        access_token: this.jwtService.sign(payload),
+      };
+    }
 
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    throw new UnauthorizedException('IDまたはパスワードが間違っています。');
   }
 }

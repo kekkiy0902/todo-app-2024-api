@@ -7,6 +7,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { Company } from '@/companies/company.entity';
+import { Role } from '@/roles/role.entity';
 
 @Table({
   createdAt: 'created_at',
@@ -26,6 +27,13 @@ export class User extends Model<User> {
     allowNull: false,
   })
   user_id: string;
+
+  @ForeignKey(() => Role)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  role_id: number;
 
   @ForeignKey(() => Company)
   @Column({
@@ -48,4 +56,7 @@ export class User extends Model<User> {
 
   @BelongsTo(() => Company)
   company: Company;
+
+  @BelongsTo(() => Role)
+  role: Role;
 }
