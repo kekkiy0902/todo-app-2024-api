@@ -32,6 +32,7 @@ export class TodoController {
   }
 
   @Get('/:id')
+  @UseInterceptors(LoggingInterceptor)
   getTodo(@Param('id') id: string): Promise<Todo | null> {
     return this.todoService.findOne(+id);
   }
