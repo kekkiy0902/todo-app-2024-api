@@ -5,7 +5,7 @@ export interface PostLoginRequest {
 
 export interface PostLoginResponse {
   user_id: string;
-  user_name: string;
   company_id: number;
+  name: string;
   access_token: string;
 }

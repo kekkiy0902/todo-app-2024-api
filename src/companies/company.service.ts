@@ -8,6 +8,10 @@ export class CompanyService {
     private readonly COMPANY_REPOSITORY: typeof Company,
   ) {}
 
+  async findOne(id: number): Promise<Company> {
+    return await this.COMPANY_REPOSITORY.findByPk<Company>(id);
+  }
+
   async findAll(): Promise<Company[]> {
     return await this.COMPANY_REPOSITORY.findAll<Company>();
   }

@@ -29,7 +29,7 @@ export class AuthService {
         user_id: user.user_id,
         role_id: user.role_id,
         company_id: user.company_id,
-        user_name: user.name,
+        name: user.name,
       };
 
       return {

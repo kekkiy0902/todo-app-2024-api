@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserDecorator } from 'src/users/user.decorator';
-import { AdminRoleGuard } from '@/auth/guards/roles.guard';
+import { AdminRoleGuard } from '@/auth/guards/admin-role.guard';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
@@ -39,9 +39,9 @@ export class UserController {
     };
   }
 
-  @Get('/:id')
-  getUser(@Param('id') id: string): Promise<User | null> {
-    return this.userService.findOne(id);
+  @Get('/:user_id')
+  getUser(@Param('user_id') user_id: string): Promise<User | null> {
+    return this.userService.findOne(user_id);
   }
 
   @Get()
