@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UserDecorator } from 'src/users/user.decorator';
 import { AdminRoleGuard } from '@/auth/guards/admin-role.guard';
+import { UserDecorator } from '@/users/user.decorator';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
